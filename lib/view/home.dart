@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
+import 'package:getx_todo/res/sheardpraf.dart';
 
 class Home extends StatelessWidget {
   Home({super.key});
@@ -8,8 +9,12 @@ class Home extends StatelessWidget {
   RxInt _number = 0.obs;
   RxString _name = "ankit".obs;
   // **********
+
+  final name = Get.arguments["name"];
+
   @override
   Widget build(BuildContext context) {
+    print(name);
     return Scaffold(
       appBar: AppBar(
         title: Text("getx todo app"),
@@ -129,15 +134,17 @@ class Home extends StatelessWidget {
                         children: [
                           ListTile(
                             trailing: Icon(Icons.light_mode),
-                            onTap: () {
+                            onTap: () async {
                               Get.changeThemeMode(ThemeMode.light);
+                              await SpData.setboolTheme(SpData.themekey, true);
                             },
                             title: Text("light mode"),
                           ),
                           ListTile(
                             trailing: Icon(Icons.dark_mode),
-                            onTap: () {
+                            onTap: () async {
                               Get.changeThemeMode(ThemeMode.dark);
+                              await SpData.setboolTheme(SpData.themekey, false);
                             },
                             title: Text("dark mode"),
                           )
@@ -149,6 +156,12 @@ class Home extends StatelessWidget {
               height: 15,
             ),
             Divider(),
+
+            TextButton(
+                onPressed: () {
+                  Get.back(result: {"id": "123456"});
+                },
+                child: Text("Back"))
           ],
         ),
       ),

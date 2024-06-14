@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_todo/utils/routes/routes.dart';
+import 'package:getx_todo/utils/routes/routes_name.dart';
 import 'package:getx_todo/view/home.dart';
+import 'package:getx_todo/res/sheardpraf.dart';
+import 'package:getx_todo/view/splash_screen.dart';
 
-void main() {
+Future<void> main() async {
   runApp(const MyApp());
+  await SpData.getPref();
 }
 
 class MyApp extends StatelessWidget {
@@ -18,8 +23,9 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData(brightness: Brightness.dark),
       // theme: ThemeData.light(),
       // darkTheme: ThemeData.dark(),
-
-      home: Home(),
+      // home: SplashScreen(),
+      initialRoute: RoutesName.splash,
+      getPages: routesList,
     );
   }
 }
