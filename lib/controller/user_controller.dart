@@ -14,5 +14,6 @@ class UserController extends GetxController {
 
   set(UserModel model) {
     _userdata.value = model;
+    update();
   }
 }

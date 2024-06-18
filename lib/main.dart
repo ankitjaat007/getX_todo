@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx_todo/res/language.dart';
 import 'package:getx_todo/utils/routes/routes.dart';
 import 'package:getx_todo/utils/routes/routes_name.dart';
-import 'package:getx_todo/view/home.dart';
+
 import 'package:getx_todo/res/sheardpraf.dart';
-import 'package:getx_todo/view/splash_screen.dart';
 
 Future<void> main() async {
   runApp(const MyApp());
@@ -18,6 +18,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      translations: Language(),
+      locale: Locale("en", "US"),
+      // fallbackLocale: Locale("en", "US"),
       title: 'Flutter Demo',
       theme: ThemeData(brightness: Brightness.light),
       darkTheme: ThemeData(brightness: Brightness.dark),

@@ -7,7 +7,7 @@ class Home extends StatelessWidget {
   Home({super.key});
   // **********
   RxInt _number = 0.obs;
-  RxString _name = "ankit".obs;
+  RxString _name = "name".obs;
   // **********
 
   final name = Get.arguments["name"];
@@ -28,7 +28,7 @@ class Home extends StatelessWidget {
             // ^^^^^^^^^^^^^^
             Obx(
               () => Text(
-                "$_number my order",
+                "$_number " + "order".tr,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
               ),
             ),
@@ -63,7 +63,7 @@ class Home extends StatelessWidget {
             // ^^^^^^^^^^^^^^
             Obx(
               () => Text(
-                "$_name",
+                "$_name".tr,
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
               ),
             ),
@@ -77,7 +77,7 @@ class Home extends StatelessWidget {
                       // _name.value.toLowerCase();
                       // _name.toLowerCase();
                     },
-                    child: Text('small text')),
+                    child: Text('smalltext'.tr)),
                 SizedBox(
                   width: 15,
                 ),
@@ -86,7 +86,7 @@ class Home extends StatelessWidget {
                     onPressed: () {
                       _name(_name.value.toUpperCase());
                     },
-                    child: Text('big text')),
+                    child: Text('bigtext'.tr)),
               ],
             ),
             SizedBox(
@@ -99,10 +99,10 @@ class Home extends StatelessWidget {
             TextButton(
                 style: TextButton.styleFrom(backgroundColor: Colors.blue),
                 onPressed: () {
-                  Get.snackbar("ankit", "message are not avelable",
+                  Get.snackbar("name", "msg".tr,
                       borderColor: Colors.amberAccent, borderWidth: 1);
                 },
-                child: Text('show snakbar')),
+                child: Text('snakbar'.tr)),
             SizedBox(
               height: 15,
             ),
@@ -114,12 +114,12 @@ class Home extends StatelessWidget {
                 style: TextButton.styleFrom(backgroundColor: Colors.green),
                 onPressed: () {
                   Get.defaultDialog(
-                      title: "ankit",
-                      middleText: "how are you",
+                      title: "name".tr,
+                      middleText: "msg".tr,
                       cancel: Icon(Icons.cancel),
                       confirm: Icon(Icons.done_all));
                 },
-                child: Text('show dilog')),
+                child: Text('diolg'.tr)),
             SizedBox(
               height: 15,
             ),
@@ -138,7 +138,7 @@ class Home extends StatelessWidget {
                               Get.changeThemeMode(ThemeMode.light);
                               await SpData.setboolTheme(SpData.themekey, true);
                             },
-                            title: Text("light mode"),
+                            title: Text("light_mode".tr),
                           ),
                           ListTile(
                             trailing: Icon(Icons.dark_mode),
@@ -146,12 +146,12 @@ class Home extends StatelessWidget {
                               Get.changeThemeMode(ThemeMode.dark);
                               await SpData.setboolTheme(SpData.themekey, false);
                             },
-                            title: Text("dark mode"),
+                            title: Text("dark".tr),
                           )
                         ],
                       ));
                 },
-                child: Text('show bottomsheet')),
+                child: Text('bottomSheet'.tr)),
             SizedBox(
               height: 15,
             ),
@@ -161,7 +161,22 @@ class Home extends StatelessWidget {
                 onPressed: () {
                   Get.back(result: {"id": "123456"});
                 },
-                child: Text("Back"))
+                child: Text("back".tr)),
+            Divider(),
+            Row(
+              children: [
+                TextButton(
+                    onPressed: () {
+                      Get.updateLocale(Locale("en", "US"));
+                    },
+                    child: Text("English")),
+                TextButton(
+                    onPressed: () {
+                      Get.updateLocale(Locale("hi", "IN"));
+                    },
+                    child: Text("hindi")),
+              ],
+            )
           ],
         ),
       ),
