@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx_todo/controller/user_controller.dart';
 import 'package:getx_todo/utils/routes/routes_name.dart';
-import 'package:getx_todo/view/home.dart';
 
 class SplashScreen extends StatelessWidget {
   SplashScreen({super.key});
-  final user = Get.put(UserController());
+  final user = Get.find<UserController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,7 +29,12 @@ class SplashScreen extends StatelessWidget {
                 child: Text("Up Date")),
             Obx(
               () => Text(user.userdata.value.name!),
-            )
+            ),
+            TextButton(
+                onPressed: () {
+                  Get.toNamed(RoutesName.clipercontaner);
+                },
+                child: Text("cliper contaner"))
           ],
         ),
       ),

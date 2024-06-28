@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
+import 'package:getx_todo/controller/languageController.dart';
+import 'package:getx_todo/res/language.dart';
 import 'package:getx_todo/res/sheardpraf.dart';
 
 class Home extends StatelessWidget {
@@ -9,9 +11,9 @@ class Home extends StatelessWidget {
   RxInt _number = 0.obs;
   RxString _name = "name".obs;
   // **********
-
+  RxBool check = false.obs;
   final name = Get.arguments["name"];
-
+  final controlerlanguage = Get.put(Languagecontroller());
   @override
   Widget build(BuildContext context) {
     print(name);
@@ -163,23 +165,72 @@ class Home extends StatelessWidget {
                 },
                 child: Text("back".tr)),
             Divider(),
-            Row(
-              children: [
-                TextButton(
-                    onPressed: () {
-                      Get.updateLocale(Locale("en", "US"));
-                    },
-                    child: Text("English")),
-                TextButton(
-                    onPressed: () {
-                      Get.updateLocale(Locale("hi", "IN"));
-                    },
-                    child: Text("hindi")),
-              ],
+            // Row(
+            //   children: [
+            //     TextButton(
+            //         onPressed: () {
+            //           Get.updateLocale(Locale("en", "US"));
+            //         },
+            //         child: Text("English")),
+            //     TextButton(
+            //         onPressed: () {
+            //           Get.updateLocale(Locale("hi", "IN"));
+            //         },
+            //         child: Text("hindi")),
+            //   ],
+            // )
+            DropdownButton(
+                value: controlerlanguage.language,
+                items: Language.language
+                    .map((e) =>
+                        DropdownMenuItem(value: e, child: Text(e.languageName)))
+                    .toList(),
+                onChanged: (value) =>
+                    controlerlanguage.setlanguage(language: value!)),
+            ClipPath(
+              clipper: mycliper(),
+              child: Container(
+                color: Colors.amber,
+                height: 45,
+                padding: EdgeInsets.all(10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("my name is ankit"),
+                    Obx(() => Switch(
+                        value: check.value,
+                        activeColor: Colors.black,
+                        inactiveThumbColor: Colors.white,
+                        onChanged: (newvalue) {
+                          check.value = !check.value;
+                        }))
+                  ],
+                ),
+              ),
             )
           ],
         ),
       ),
     );
+  }
+}
+
+class mycliper extends CustomClipper<Path> {
+  @override
+  getClip(Size size) {
+    var path = Path();
+    path.lineTo(0, 0);
+    path.lineTo(40, 0);
+    path.quadraticBezierTo(0, size.height / 2, 0, size.height / 6);
+
+    path.lineTo(size.height, size.width);
+    path.lineTo(size.width, size.height);
+    path.lineTo(size.width, 0);
+    return path;
+  }
+
+  @override
+  bool shouldReclip(covariant CustomClipper oldClipper) {
+    return false;
   }
 }
